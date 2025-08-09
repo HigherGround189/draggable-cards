@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="card-inner">
+    <div class="card-inner" :style="{ background: `var(--${colour})` }">
       <div class="card-number">
         <span :class="underline ? 'underline' : ''">{{ num }}</span>
       </div>
@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    props: ["num"],
+    props: ["num", "colour"],
     data() {
       return {
         underline: false
@@ -32,12 +32,13 @@
     padding: 5px;
     /* opacity: 0.75; */
 
-    width: 116px;
-    height: 178px;
+    width: 6.05vw;
+    aspect-ratio: 116 / 178;
     border-radius: 5px;
     box-shadow:0 0 10px #aaaaaa;
 
     cursor: pointer;
+    user-select: none;
   }
 
   .card:hover {
@@ -45,7 +46,12 @@
   }
 
   .card-inner {
-    background: hsl(153, 48%, 49%);
+    --red: hsl(0, 80%, 40%);
+    --green: hsl(150, 50%, 50%);
+    --blue: hsl(235, 50%, 40%);
+    --yellow: hsl(50, 75%, 50%);
+
+    background: var(--blue);
     border-radius: 5px;
     height: 100%;
     width: 100%;
@@ -56,7 +62,7 @@
 
     font-family: "Poppins", sans-serif;
     font-weight: bolder;
-    font-size: 3.5rem;
+    font-size: 3.5vw;
 
     width: 100%;
     height: 100%;
