@@ -6,6 +6,7 @@
 
 <script>
   import Cards from './components/Cards.vue';
+  import interact from 'interactjs';
 
   function getRandomIntInclusive(min, max) {
     const minCeiled = Math.ceil(min)
