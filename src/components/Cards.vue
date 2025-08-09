@@ -1,5 +1,5 @@
 <template>
-  <div class="card" ref="card">
+  <div class="card" ref="card" :style="{ zIndex: zIndex }" v-on="{ click: zIndexIncrement, mousedown: mouseDown, mouseup: mouseUp }">
     <div class="card-inner" :style="{ background: `var(--${colour})` }">
       <div class="card-number">
         <span :class="underline">{{ num }}</span>
@@ -11,9 +11,8 @@
 <script>
   import interact from 'interactjs';
 
-
   export default {
-    props: ["num", "colour"],
+    props: ["num", "colour", "zIndex", "zIndexList"],
     data() {
       return {
 
@@ -45,6 +44,18 @@
             },
           }
         })
+      },
+      zIndexIncrement() {
+        const zIndexListMax = Math.max(...this.$props.zIndexList)
+        console.log(this.$props.zIndexList)
+        console.log("Max" + zIndexListMax)
+        this.$emit('update:zIndex', zIndexListMax + 1)
+      },
+      mouseDown() {
+        this.$refs.card.style.zIndex = 9999999999999
+      },
+      mouseUp() {
+        this.$refs.card.style.zIndex = this.zIndex
       }
     },
     mounted() {

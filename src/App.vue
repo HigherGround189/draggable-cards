@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <Cards v-for="(colour, index) in cardColourList" :num="index" :colour="colour"/>
+    <Cards v-for="(colour, index) in cardColourList" :num="index" :colour="colour" v-model:zIndex="zIndexList[index]" :zIndexList="zIndexList"/>
   </div>
 </template>
 
@@ -32,6 +32,7 @@
       for (let i=0; i <= NUM_OF_CARDS; i++) {
         randNum = getRandomIntInclusive(0, 3)
         this.cardColourList.push(colourList[randNum])
+        this.zIndexList.push(0)
       }
     }
   }
