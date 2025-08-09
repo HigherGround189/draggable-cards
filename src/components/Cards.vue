@@ -33,6 +33,12 @@
         const position = { x: 0, y: 0 };
 
         interact(this.$refs.card).draggable({
+          modifiers: [
+            interact.modifiers.restrictRect({
+              restriction: "body",
+              endOnly: true
+            })
+          ],
           cursorChecker: () => null,
           listeners: {
             move (event) {
@@ -53,6 +59,7 @@
       },
       mouseDown() {
         this.$refs.card.style.zIndex = 9999999999999
+        document.style
       },
       mouseUp() {
         this.$refs.card.style.zIndex = this.zIndex

@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <Cards v-for="(colour, index) in cardColourList" :num="index" :colour="colour" v-model:zIndex="zIndexList[index]" :zIndexList="zIndexList"/>
+    <Cards v-for="(colour, index) in cardColourList" :key="index" :num="index" :colour="colour" v-model:zIndex="zIndexList[index]" :zIndexList="zIndexList"/>
   </div>
 </template>
 
