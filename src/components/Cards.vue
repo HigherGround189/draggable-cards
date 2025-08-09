@@ -2,7 +2,7 @@
   <div class="card" ref="card">
     <div class="card-inner" :style="{ background: `var(--${colour})` }">
       <div class="card-number">
-        <span :class="underline ? 'underline' : ''">{{ num }}</span>
+        <span :class="underline">{{ num }}</span>
       </div>
     </div>
   </div>
@@ -16,18 +16,21 @@
     props: ["num", "colour"],
     data() {
       return {
-        underline: false
+
+      }
+    },
+    computed: {
+      underline() {
+        let underlineClass = ""
+        if (this.$props.num === 6 || this.$props.num === 9) {
+          underlineClass = "underline"
+        }
+
+        return underlineClass
       }
     },
     methods: {
-      checkNum() {
-        if (this.$props.num === 6 || this.$props.num === 9) {
-          this.underline = true
-        }
-      },
-
       makeDraggable() {
-        // const cardPositionRaw = this.$refs.card.getBoundingClientRect()
         const position = { x: 0, y: 0 };
 
         console.log(position)
@@ -49,7 +52,6 @@
       }
     },
     mounted() {
-      this.checkNum()
       this.makeDraggable()
     }
   }
