@@ -53,8 +53,6 @@
       },
       zIndexIncrement() {
         const zIndexListMax = Math.max(...this.$props.zIndexList)
-        console.log(this.$props.zIndexList)
-        console.log("Max" + zIndexListMax)
         this.$emit('update:zIndex', zIndexListMax + 1)
       },
       mouseDown() {
@@ -80,14 +78,15 @@
     padding: 5px;
     /* opacity: 0.75; */
 
-    width: 6.05vw;
-    aspect-ratio: 116 / 178;
+    width: 116px;
+    height: 178px;
     border-radius: 5px;
     box-shadow:0 0 10px #aaaaaa;
 
     cursor: grab;
     user-select: none;
-    touch-action: none
+    touch-action: none;
+    transition: 0.3s transform;
   }
 
   .card:hover {
@@ -96,6 +95,7 @@
 
   .card:active {
     cursor: grabbing;
+    transition: none;
   }
 
   .card-inner {
