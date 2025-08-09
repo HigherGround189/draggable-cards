@@ -12,12 +12,15 @@
     const maxFloored = Math.floor(max)
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)
   }
+  
+  const NUM_OF_CARDS = 10
 
   export default {
     components: { Cards },
     data() {
       return {
-        cardColourList: []
+        cardColourList: [],
+        zIndexList: []
       }
     },
     methods: {
@@ -26,7 +29,7 @@
     created() {
       let randNum;
       const colourList = ["red", "yellow", "green", "blue"]
-      for (let i=0; i <= 100; i++) {
+      for (let i=0; i <= NUM_OF_CARDS; i++) {
         randNum = getRandomIntInclusive(0, 3)
         this.cardColourList.push(colourList[randNum])
       }
