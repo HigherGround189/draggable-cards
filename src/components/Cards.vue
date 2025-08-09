@@ -36,6 +36,7 @@
         console.log(position)
 
         interact(this.$refs.card).draggable({
+          cursorChecker: () => null,
           listeners: {
             start (event) {
               console.log(event.type, event.target)
@@ -71,13 +72,17 @@
     border-radius: 5px;
     box-shadow:0 0 10px #aaaaaa;
 
-    cursor: pointer;
+    cursor: grab;
     user-select: none;
     touch-action: none
   }
 
   .card:hover {
     opacity: 1;
+  }
+
+  .card:active {
+    cursor: grabbing;
   }
 
   .card-inner {
