@@ -47,6 +47,7 @@
     font-size: 5.5rem;
     text-align: center;
     margin-bottom: 10vh;
+    text-shadow: 0 0 5px #aaaaaa;
   }
 
   .card-container {
