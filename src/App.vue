@@ -1,4 +1,6 @@
 <template>
+  <h1>Draggable Cards</h1>
+
   <div class="card-container">
     <Cards v-for="(colour, index) in cardColourList" :key="index" :num="index" :colour="colour" v-model:zIndex="zIndexList[index]" :zIndexList="zIndexList"/>
   </div>
@@ -13,7 +15,7 @@
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)
   }
   
-  const NUM_OF_CARDS = 10
+  const NUM_OF_CARDS = 9
 
   export default {
     components: { Cards },
@@ -39,9 +41,18 @@
 </script>
 
 <style scoped>
+  h1 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5.5rem;
+    text-align: center;
+    margin-bottom: 10vh;
+  }
+
   .card-container {
     display: flex;
     gap: 5vw; 
     flex-wrap: wrap;
+    justify-content: center;
   }
 </style>
