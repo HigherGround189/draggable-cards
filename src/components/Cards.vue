@@ -33,14 +33,9 @@
       makeDraggable() {
         const position = { x: 0, y: 0 };
 
-        console.log(position)
-
         interact(this.$refs.card).draggable({
           cursorChecker: () => null,
           listeners: {
-            start (event) {
-              console.log(event.type, event.target)
-            },
             move (event) {
               position.x += event.dx
               position.y += event.dy

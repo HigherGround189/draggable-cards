@@ -1,6 +1,6 @@
 <template>
   <div class="card-container">
-    <Cards v-for="n in 10" :num="n - 1" :colour="colour()"/>
+    <Cards v-for="(colour, index) in cardColourList" :num="index" :colour="colour"/>
   </div>
 </template>
 
@@ -17,13 +17,18 @@
     components: { Cards },
     data() {
       return {
-        colourMap: ["red", "yellow", "green", "blue"]
+        cardColourList: []
       }
     },
     methods: {
-      colour() {
-        const randNum = getRandomIntInclusive(0, 3)
-        return this.colourMap[randNum]
+
+    },
+    created() {
+      let randNum;
+      const colourList = ["red", "yellow", "green", "blue"]
+      for (let i=0; i <= 100; i++) {
+        randNum = getRandomIntInclusive(0, 3)
+        this.cardColourList.push(colourList[randNum])
       }
     }
   }
