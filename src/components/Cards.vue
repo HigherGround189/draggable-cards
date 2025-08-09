@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" ref="card">
     <div class="card-inner" :style="{ background: `var(--${colour})` }">
       <div class="card-number">
         <span :class="underline ? 'underline' : ''">{{ num }}</span>
@@ -9,19 +9,51 @@
 </template>
 
 <script>
+  import interact from 'interactjs';
+
+
   export default {
     props: ["num", "colour"],
     data() {
       return {
         underline: false
       }
-    },  
-    mounted() {
-      if (this.$props.num === 6 || this.$props.num === 9) {
-        this.underline = true
+    },
+    methods: {
+      checkNum() {
+        if (this.$props.num === 6 || this.$props.num === 9) {
+          this.underline = true
+        }
+      },
+
+      makeDraggable() {
+        // const cardPositionRaw = this.$refs.card.getBoundingClientRect()
+        const position = { x: 0, y: 0 };
+
+        console.log(position)
+
+        interact(this.$refs.card).draggable({
+          listeners: {
+            start (event) {
+              console.log(event.type, event.target)
+            },
+            move (event) {
+              position.x += event.dx
+              position.y += event.dy
+
+              event.target.style.transform =
+                `translate(${position.x}px, ${position.y}px)`
+            },
+          }
+        })
       }
+    },
+    mounted() {
+      this.checkNum()
+      this.makeDraggable()
     }
   }
+
 </script>
 
 <style scoped>
@@ -39,6 +71,7 @@
 
     cursor: pointer;
     user-select: none;
+    touch-action: none
   }
 
   .card:hover {
