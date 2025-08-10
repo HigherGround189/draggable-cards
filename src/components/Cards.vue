@@ -85,11 +85,11 @@ export default {
   cursor: grab;
   user-select: none;
   touch-action: none;
-  transition: 0.3s transform;
+  transition: transform 0.3s, box-shadow 0.15s ease-out;
 }
 
 .card:hover {
-  opacity: 1;
+  box-shadow: 0 0 50px #aaaaaa;
 }
 
 .card:active {

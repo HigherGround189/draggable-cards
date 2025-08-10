@@ -53,6 +53,7 @@ h1 {
   text-align: center;
   margin-bottom: 10vh;
   text-shadow: 0 0 5px #aaaaaa;
+  user-select: none;
 }
 
 .card-container {
