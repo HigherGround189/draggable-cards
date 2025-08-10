@@ -103,7 +103,7 @@ export default {
   --blue: hsl(235, 50%, 40%);
   --yellow: hsl(50, 75%, 50%);
 
-  background: var(--blue);
+  background: var(--green);
   border-radius: 5px;
   height: 100%;
   width: 100%;
