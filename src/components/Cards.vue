@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="card"
-    ref="card"
-    :style="{ zIndex: zIndex }"
-    v-on="{ click: zIndexIncrement, mousedown: mouseDown, mouseup: mouseUp }"
-  >
+  <div class="card" ref="card" :style="{ zIndex: zIndex }" @mousedown="zIndexIncrement">
     <div class="card-inner" :style="{ background: `var(--${colour})` }">
       <div class="card-number">
         <span :class="underline">{{ num }}</span>
@@ -14,7 +9,7 @@
 </template>
 
 <script>
-import interact from 'interactjs'
+import { createDraggable } from 'animejs'
 
 export default {
   props: ['num', 'colour', 'zIndex', 'zIndexList'],
@@ -33,37 +28,17 @@ export default {
   },
   methods: {
     makeDraggable() {
-      const position = { x: 0, y: 0 }
-
-      interact(this.$refs.card).draggable({
-        modifiers: [
-          interact.modifiers.restrictRect({
-            restriction: 'body',
-            endOnly: true,
-          }),
-        ],
-        cursorChecker: () => null,
-        listeners: {
-          move(event) {
-            position.x += event.dx
-            position.y += event.dy
-
-            event.target.style.transform = `translate(${position.x}px, ${position.y}px)`
-          },
-        },
+      createDraggable(this.$refs.card, {
+        container: 'body',
+        containerFriction: 0.1,
+        onGrab: () => this.$refs.card.style.zIndex = 9999999999999,
+        onRelease: () => this.$refs.card.style.zIndex = this.zIndex
       })
     },
     zIndexIncrement() {
       const zIndexListMax = Math.max(...this.$props.zIndexList)
       this.$emit('update:zIndex', zIndexListMax + 1)
-    },
-    mouseDown() {
-      this.$refs.card.style.zIndex = 9999999999999
-      document.style
-    },
-    mouseUp() {
-      this.$refs.card.style.zIndex = this.zIndex
-    },
+    }
   },
   mounted() {
     this.makeDraggable()
@@ -75,7 +50,6 @@ export default {
 .card {
   background: white;
   padding: 5px;
-  /* opacity: 0.75; */
 
   width: 116px;
   height: 178px;
@@ -85,7 +59,7 @@ export default {
   cursor: grab;
   user-select: none;
   touch-action: none;
-  transition: transform 0.3s, box-shadow 0.15s ease-out;
+  transition: box-shadow 0.15s ease-out;
 }
 
 .card:hover {
@@ -94,7 +68,6 @@ export default {
 
 .card:active {
   cursor: grabbing;
-  transition: none;
 }
 
 .card-inner {

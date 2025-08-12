@@ -12,7 +12,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "interactjs": "^1.10.27",
+    "animejs": "^4.1.3",
     "vue": "^3.5.17"
   },
   "devDependencies": {
